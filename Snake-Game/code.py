@@ -32,14 +32,9 @@
 # The Model never calls the View.  The View never reads inputs.
 # All communication flows through the Controller.
 
-import sys
-import time
-
+import pykit_explorer
 import supervisor
 supervisor.runtime.autoreload = True     # auto-reload when code.py changes
-
-# Add /API to the import path so we can use the hardware abstraction modules
-sys.path.append("/API")
 
 # -- Hardware abstraction modules (from /API) --------------------------------
 from lcd_display import LCDDisplay    # ST7789 240x135 TFT LCD

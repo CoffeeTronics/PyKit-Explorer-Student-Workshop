@@ -21,14 +21,13 @@
 #     show_game_over(), play_food_sfx() when events occur.
 #   - render() reads model.snake and model.food directly -- this is
 #     the only place the View "sees" the Model, and it only reads.
-
-import time
+import pykit_explorer
 import displayio
 import terminalio
 from adafruit_display_text import bitmap_label
 
 from lcd_display import WIDTH, HEIGHT           # 240, 135
-from neopixels import BLUE, GREEN as NEO_GREEN
+from neopixels import Colors
 from snake_model import GRID_W, GRID_H          # 24, 18
 
 # Palette index constants -- used when painting cells in the bitmap.
@@ -209,7 +208,7 @@ class SnakeView:
         Blue  = manual play (player tilts the board)
         Green = demo mode (AI plays automatically)
         """
-        self._px.fill(NEO_GREEN if demo_mode else BLUE)
+        self._px.fill(Colors.GREEN if demo_mode else Colors.BLUE)
 
     def flash_led(self, n=3, on_s=0.05, off_s=0.05):
         """Blink the on-board LED as tactile feedback for touch input."""
