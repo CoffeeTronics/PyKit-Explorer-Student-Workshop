@@ -22,7 +22,8 @@ _HEAD  = 3
 # Sound effect paths for preloading
 _SOUND_PATHS = {
     "food": "/AudioFiles/210.wav",
-    "gameover": "/AudioFiles/140.wav",
+    "hit": "/AudioFiles/140.wav",
+    "gameover": "/AudioFiles/Snake_Game_Over_Jingle_Alt.wav",
 }
 
 try:
@@ -322,9 +323,21 @@ class SnakeView:
         if self._audio:
             self._audio.play_preloaded("food")
 
+    def play_hit_sfx(self):
+        """Play sound for losing a life (not final death)."""
+        if self._audio:
+            self._audio.play_preloaded("hit")
+
     def play_gameover_sfx(self):
+        """Play sound for final death (game over)."""
         if self._audio:
             self._audio.play_preloaded("gameover")
+
+    def is_audio_playing(self):
+        """Check if audio is currently playing."""
+        if self._audio:
+            return self._audio.is_playing
+        return False
 
     def cleanup(self):
         """Release view resources."""

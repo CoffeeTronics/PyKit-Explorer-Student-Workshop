@@ -88,7 +88,7 @@ class SnakeGame(BaseGame):
                     self.view.flash_red()
                     self.view.flash_neopixels_hit()
                     if not self.model.demo_mode:
-                        self.view.play_gameover_sfx()
+                        self.view.play_hit_sfx()
                     time.sleep(1.0)  # Let audio play
                     self.view.update_neopixels(self.model)
                     self.view.render(self.model)
@@ -101,6 +101,12 @@ class SnakeGame(BaseGame):
                     self.view.flash_neopixels_gameover()
                     self.view.show_game_over(self.model.score, self.model.high_score)
                     self._save_score()
+                    # Wait for full audio clip to finish (~8 seconds)
+                    while self.view.is_audio_playing():
+                        switch_detector.update()
+                        if switch_detector.fell:
+                            return True
+                        time.sleep(0.1)
                     # Return to launcher after game over
                     return True
 
