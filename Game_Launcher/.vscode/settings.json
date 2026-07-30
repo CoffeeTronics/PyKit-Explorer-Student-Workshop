@@ -1,0 +1,9 @@
+{
+    "python.languageServer": "Pylance",
+    "python.analysis.diagnosticSeverityOverrides": {
+        "reportMissingModuleSource": "none",
+        "reportShadowedImports": "none"
+    },
+    "circuitpython.board.version": "10.1.0-alpha.0-2-g706c4b2abf",
+    "terminal.integrated.stickyScroll.enabled": false
+}
