@@ -16,6 +16,8 @@ class BaseGame:
 
     NAME = "Unnamed Game"
     HIGH_SCORE_SLOT = -1  # Must be overridden with unique slot number (0-29)
+    GAME_OVER_IMAGE = None  # Path to game-over BMP, e.g. "/Sprites/Game_Over_X.bmp"
+    GAME_OVER_SOUND = None  # Path to game-over WAV, e.g. "/AudioFiles/gameover.wav"
 
     def __init__(self, lcd, imu, neopixels, audio, high_score_manager):
         """Initialize with shared hardware resources.
@@ -63,18 +65,22 @@ class BaseGame:
 
         Returns
         -------
-        bool
-            True if a game switch was requested (D11 falling edge detected),
-            False if the game exited for another reason.
+        str or bool
+            - "gameover" if the game ended due to player losing all lives
+            - "switch" or True if user requested game switch (D11 press)
+            - "victory" if player completed the game
+            - False for other exit reasons
 
         Must be implemented by subclasses. Typical structure:
 
             while True:
                 switch_detector.update()
                 if switch_detector.fell:
-                    return True
+                    return "switch"
 
                 # Game logic here...
+                if game_over:
+                    return "gameover"
                 time.sleep(0.033)
         """
         raise NotImplementedError("Subclasses must implement run()")
